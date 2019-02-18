@@ -1,0 +1,7 @@
+- Game state manager
+	- Main menu
+	- Playing
+	- Game over
+
+- Main Menu screen
+- Game over screen
