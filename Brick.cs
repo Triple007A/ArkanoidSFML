@@ -44,6 +44,7 @@ namespace BombermanSFML
                 {
                     ((Ball)other).ChangeVerticalDirection();
                     IsActive = false;
+                    Score.UpdateScore(1);
                 }
             }
         }

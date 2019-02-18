@@ -30,7 +30,6 @@ namespace BombermanSFML
             Shape.FillColor = Color;
 
             Position = new Vector2f(0, 0);
-
         }
 
         public void PlayerMove(object sender, MouseMoveEventArgs e)
