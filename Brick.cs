@@ -47,7 +47,7 @@ namespace BombermanSFML
                 if (other is Ball)
                 {
                     var delta = ((Ball)other).Position - this.Shape.Position;
-                    Vector2f scaled = new Vector2f(delta.X * physicsScale, delta.Y * 1.0f);
+                    Vector2f scaled = new Vector2f(delta.X * physicsScale, delta.Y);
                     if (Math.Abs(scaled.X) >= Math.Abs(scaled.Y))
                     {
                         ((Ball)other).ChangeHorizontalDirection();
