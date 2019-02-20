@@ -19,7 +19,7 @@ namespace BombermanSFML
         static Bound rightBound = new Bound(new Vector2f((float)screenWidth - 20.0f, 0.0f), new Vector2f(20.0f, screenHeight), Color.White, BoundType.Right);
 
         static Bound upperBound = new Bound(new Vector2f(0.0f, 0.0f), new Vector2f(screenWidth, 20.0f), Color.White, BoundType.Upper);
-        static Bound bottomBound = new Bound(new Vector2f(0.0f, (float)screenHeight - 20.0f), new Vector2f(screenWidth, 20.0f), Color.White, BoundType.Bottom);
+        //static Bound bottomBound = new Bound(new Vector2f(0.0f, (float)screenHeight - 20.0f), new Vector2f(screenWidth, 20.0f), Color.White, BoundType.Bottom);
 
         static Player player = new Player();
         static List<Brick> brics = new List<Brick>();
@@ -38,7 +38,7 @@ namespace BombermanSFML
 
             player.Position = new Vector2f(500, 700);
 
-            ball.Position = new Vector2f(500, 500);
+            ball.Position = new Vector2f(530, 500);
             ball.Speed = 300;
 
             Clock clock = new Clock();
@@ -74,7 +74,7 @@ namespace BombermanSFML
                 leftBound.CheckForCollision(ball);
                 rightBound.CheckForCollision(ball);
                 upperBound.CheckForCollision(ball);
-                bottomBound.CheckForCollision(ball);
+                //bottomBound.CheckForCollision(ball);
 
                 window.Display();
             }
@@ -85,7 +85,7 @@ namespace BombermanSFML
             leftBound.Draw(window);
             rightBound.Draw(window);
             upperBound.Draw(window);
-            bottomBound.Draw(window);
+           // bottomBound.Draw(window);
         }
     }
 }

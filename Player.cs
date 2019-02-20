@@ -21,10 +21,14 @@ namespace BombermanSFML
         public Color Color { get; set; }
         public Shape Shape { get; set; }
 
+        private float physicsScale;
+
         public Player()
         {
             Size = new Vector2f(100.0f, 20.0f);
             Color = Color.Blue;
+
+            physicsScale = Size.Y / Size.X;
 
             Shape = new RectangleShape(Size);
             Shape.FillColor = Color;
@@ -43,8 +47,12 @@ namespace BombermanSFML
             {
                 if(other is Ball)
                 {
-                    ((Ball)other).ChangeVerticalDirection();
-                    ((Ball)other).Speed += 50;
+                    var delta = ((Ball)other).Position - this.Shape.Position;
+                    Vector2f scaled = new Vector2f(delta.X * physicsScale, delta.Y * 1.0f);
+                    if (Math.Abs(scaled.X) >= Math.Abs(scaled.Y))
+                        ((Ball)other).ChangeHorizontalDirection();
+                    else
+                        ((Ball)other).ChangeVerticalDirection();
                 }
             }
         }

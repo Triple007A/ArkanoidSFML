@@ -28,6 +28,8 @@ namespace BombermanSFML
         public Color Color { get; set; }
         public Vector2f Size { get; set; }
 
+        private float physicsScale;
+
         public BoundType Type { get; set; }
 
         public Bound(Vector2f position, Vector2f size, Color color, BoundType type)
@@ -35,6 +37,8 @@ namespace BombermanSFML
             Type = Type;
             Size = size;
             Color = color;
+
+            physicsScale = Size.X / Size.Y; ;
 
             Shape = new RectangleShape(Size);
             Position = position;
@@ -48,9 +52,17 @@ namespace BombermanSFML
             {
                 if (other is Ball)
                 {
-                    if (Type == BoundType.Left || Type == BoundType.Right)
+                    Vector2f scaled;
+                    var delta = ((Ball)other).Position - this.Shape.Position;
+
+                    if (Type == BoundType.Bottom || Type == BoundType.Upper)
+                        scaled = new Vector2f(delta.X * physicsScale, delta.Y * 1.0f);
+                    else
+                        scaled = new Vector2f(delta.X * 1.0f, delta.Y * physicsScale);
+
+                    if (Math.Abs(scaled.X) >= Math.Abs(scaled.Y))
                         ((Ball)other).ChangeHorizontalDirection();
-                    else if(Type == BoundType.Upper || Type == BoundType.Bottom)
+                    else
                         ((Ball)other).ChangeVerticalDirection();
                 }
             }
