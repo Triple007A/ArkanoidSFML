@@ -30,6 +30,7 @@ namespace BombermanSFML
         public Shape Shape { get; set; }
         public Color Color { get; set; }
         public float Radius { get; set; }
+        public Vector2f Velocity { get; set; }
 
         private float speed = 0;
         public float Speed
@@ -49,6 +50,8 @@ namespace BombermanSFML
             Shape = new CircleShape(Radius);
             Shape.FillColor = Color;
 
+            Velocity = new Vector2f(1.0f, 1.0f);
+
             Speed = 0.1f;
         }
 
@@ -58,14 +61,14 @@ namespace BombermanSFML
             float newY = Position.Y;
 
             if (verticalDirection == VerticalDirection.Up)
-                newY -= Speed * delta;
+                newY -= Speed * Velocity.Y * delta;
             else
-                newY += Speed * delta;
+                newY += Speed * Velocity.Y * delta;
 
             if (horizontalDirection == HorizontalDirection.Right)
-                newX += Speed * delta;
+                newX += Speed * Velocity.X * delta;
             else
-                newX -= Speed * delta;
+                newX -= Speed * Velocity.X * delta;
 
             Position = new Vector2f(newX, newY);
         }

@@ -60,6 +60,9 @@ namespace BombermanSFML
 
                 ball.Move(delta);
 
+                if (CheckGameOver(ball))
+                    break;
+
                 Score.Draw(window);
 
                 player.Draw(window);
@@ -88,6 +91,14 @@ namespace BombermanSFML
             rightBound.Draw(window);
             upperBound.Draw(window);
            // bottomBound.Draw(window);
+        }
+
+        static bool CheckGameOver(Ball ball)
+        {
+            if (ball.Position.Y > screenWidth)
+                return true;
+
+            return false;
         }
     }
 }
