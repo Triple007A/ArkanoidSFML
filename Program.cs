@@ -28,12 +28,14 @@ namespace BombermanSFML
         static void Main(string[] args)
         {
             var window = new RenderWindow(new VideoMode(screenWidth, screenHeight), "Bomberman", Styles.Default);
+            window.SetFramerateLimit(60);
             window.Closed += (sender, arg) => window.Close();
             window.MouseMoved += player.PlayerMove;
 
             for (int i = 0; i < 10; i++)
             {
                 brics.Add(new Brick(new Vector2f(i * 100.0f, 50.0f), Color.Red, new Vector2f(70.0f, 20.0f)));
+                brics.Add(new Brick(new Vector2f(i * 100.0f, 100.0f), Color.Green, new Vector2f(70.0f, 20.0f)));
             }
 
             player.Position = new Vector2f(500, 700);
