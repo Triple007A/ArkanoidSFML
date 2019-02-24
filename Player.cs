@@ -54,16 +54,24 @@ namespace BombermanSFML
                     else
                         ((Ball)other).ChangeVerticalDirection();
 
-                    /*float enlargeScale = physicsScale;
+                    float d = (((Ball)other).Position.X - this.Position.X);
+                    Console.WriteLine("D: {0}", d);
 
-                    //float angle = -((((Ball)other).Position.X - this.Position.X)) + 90.0f;
-                    float angle = (-(((Ball)other).Position.X - this.Position.X) * 60f / enlargeScale) + 90f;
+                    float angle = (d / Size.X * 150) + 30;
 
-                    double velolotyY = Math.Tan(angle);
-                    double velocityX = 1 / Math.Tan(angle);
+                    angle = (float)((Math.PI / 180) * angle);
 
-                    //((Ball)other).Velocity = new Vector2f((float)velocityX, (float)velolotyY);
-                    Console.WriteLine(angle);*/
+                    Console.WriteLine("Angle: {0}", angle);
+                    
+                    Console.WriteLine("Sin(90) = {0}", Math.Sin(angle));
+
+                    double velocityY = Math.Sin(angle);
+                    double velocityX = Math.Cos(angle);
+
+                    Console.WriteLine("VelocityX: {0}, VelocityY: {1}", velocityX, velocityY);
+
+                    ((Ball)other).Velocity = new Vector2f((float)velocityX, (float)velocityY);
+                    Console.WriteLine(angle);
                 }
             }
         }

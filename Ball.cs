@@ -55,10 +55,31 @@ namespace BombermanSFML
             Speed = 0.1f;
         }
 
+        private void ClampVelocity()
+        {
+            float newVX, newVY;
+            if (Velocity.X > Velocity.Y)
+            {
+                newVY = Velocity.Y / Velocity.X;
+                newVX = 1.0f;
+            }
+            else
+            {
+                newVX = Velocity.X / Velocity.Y;
+                newVY = 1.0f;
+            }
+
+            Velocity = new Vector2f(newVX, newVY);
+        }
+
         public void Move(float delta)
         {
             float newX = Position.X;
             float newY = Position.Y;
+
+            ClampVelocity();
+            
+            //Console.WriteLine("Velocity Normalized: X: {0}, Y: {1}", Velocity.X, Velocity.Y);
 
             if (verticalDirection == VerticalDirection.Up)
                 newY -= Speed * Velocity.Y * delta;
