@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using SFML.Graphics;
 using SFML.System;
 
-namespace BombermanSFML
+namespace ArkanoidSFML
 {
     public enum BoundType
     {

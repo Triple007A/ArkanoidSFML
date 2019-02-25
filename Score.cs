@@ -7,7 +7,7 @@ using SFML.System;
 using SFML.Graphics;
 using SFML.Window;
 
-namespace BombermanSFML
+namespace ArkanoidSFML
 {
     static class Score
     {

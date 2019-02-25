@@ -7,7 +7,7 @@ using SFML.System;
 using SFML.Graphics;
 using SFML.Window;
 
-namespace BombermanSFML
+namespace ArkanoidSFML
 {
     class Brick : IShape, ICollidable, IDrawable
     {
@@ -51,14 +51,14 @@ namespace BombermanSFML
                     if (Math.Abs(scaled.X) >= Math.Abs(scaled.Y))
                     {
                         ((Ball)other).ChangeHorizontalDirection();
-                        Score.UpdateScore(1);
                         IsActive = false;
+                        Score.UpdateScore(1);
                     }
                     else
                     {
                         ((Ball)other).ChangeVerticalDirection();
-                        Score.UpdateScore(1);
                         IsActive = false;
+                        Score.UpdateScore(1);
                     }
                 }
             }

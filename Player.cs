@@ -7,7 +7,7 @@ using SFML.System;
 using SFML.Graphics;
 using SFML.Window;
 
-namespace BombermanSFML
+namespace ArkanoidSFML
 {
     class Player : IShape, ICollidable, IDrawable
     {
@@ -38,7 +38,7 @@ namespace BombermanSFML
 
         public void PlayerMove(object sender, MouseMoveEventArgs e)
         {
-            Position = new Vector2f(e.X, Position.Y);
+            Position = new Vector2f(e.X - this.Size.X / 2, Position.Y);
         }
 
         public void CheckForCollision(object other)
@@ -49,29 +49,19 @@ namespace BombermanSFML
                 {
                     var delta = ((Ball)other).Position - this.Shape.Position;
                     Vector2f scaled = new Vector2f(delta.X * physicsScale, delta.Y * 1.0f);
-                    if (Math.Abs(scaled.X) >= Math.Abs(scaled.Y))
+
+                    float collisionDistance = (((Ball)other).Position.X + ((Ball)other).Radius - this.Position.X) - Size.X / 2;
+
+                    float newVelX = Math.Abs(collisionDistance) / 50;
+
+                    ((Ball)other).Velocity = new Vector2f(-newVelX, 1.0f);
+
+                    if (collisionDistance > 0 && ((Ball)other).GetHorizontalDirection() == HorizontalDirection.Right)
                         ((Ball)other).ChangeHorizontalDirection();
-                    else
-                        ((Ball)other).ChangeVerticalDirection();
+                    else if (collisionDistance < 0 && ((Ball)other).GetHorizontalDirection() == HorizontalDirection.Left)
+                        ((Ball)other).ChangeHorizontalDirection();
 
-                    float d = (((Ball)other).Position.X - this.Position.X);
-                    Console.WriteLine("D: {0}", d);
-
-                    float angle = (d / Size.X * 150) + 30;
-
-                    angle = (float)((Math.PI / 180) * angle);
-
-                    Console.WriteLine("Angle: {0}", angle);
-                    
-                    Console.WriteLine("Sin(90) = {0}", Math.Sin(angle));
-
-                    double velocityY = Math.Sin(angle);
-                    double velocityX = Math.Cos(angle);
-
-                    Console.WriteLine("VelocityX: {0}, VelocityY: {1}", velocityX, velocityY);
-
-                    ((Ball)other).Velocity = new Vector2f((float)velocityX, (float)velocityY);
-                    Console.WriteLine(angle);
+                    ((Ball)other).ChangeVerticalDirection();
                 }
             }
         }

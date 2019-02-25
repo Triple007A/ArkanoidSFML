@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using SFML.Graphics;
 using SFML.System;
 
-namespace BombermanSFML
+namespace ArkanoidSFML
 {
     enum HorizontalDirection
     {
@@ -30,6 +30,7 @@ namespace BombermanSFML
         public Shape Shape { get; set; }
         public Color Color { get; set; }
         public float Radius { get; set; }
+
         public Vector2f Velocity { get; set; }
 
         private float speed = 0;
@@ -50,36 +51,15 @@ namespace BombermanSFML
             Shape = new CircleShape(Radius);
             Shape.FillColor = Color;
 
-            Velocity = new Vector2f(1.0f, 1.0f);
-
             Speed = 0.1f;
-        }
 
-        private void ClampVelocity()
-        {
-            float newVX, newVY;
-            if (Velocity.X > Velocity.Y)
-            {
-                newVY = Velocity.Y / Velocity.X;
-                newVX = 1.0f;
-            }
-            else
-            {
-                newVX = Velocity.X / Velocity.Y;
-                newVY = 1.0f;
-            }
-
-            Velocity = new Vector2f(newVX, newVY);
+            Velocity = new Vector2f(1.0f, 1.0f);
         }
 
         public void Move(float delta)
         {
             float newX = Position.X;
             float newY = Position.Y;
-
-            ClampVelocity();
-            
-            //Console.WriteLine("Velocity Normalized: X: {0}, Y: {1}", Velocity.X, Velocity.Y);
 
             if (verticalDirection == VerticalDirection.Up)
                 newY -= Speed * Velocity.Y * delta;
@@ -108,6 +88,11 @@ namespace BombermanSFML
                 horizontalDirection = HorizontalDirection.Right;
             else
                 horizontalDirection = HorizontalDirection.Left;
+        }
+
+        public HorizontalDirection GetHorizontalDirection()
+        {
+            return horizontalDirection;
         }
 
         public void Draw(RenderWindow window)
