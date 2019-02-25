@@ -1,12 +1,3 @@
 ﻿obj/
 bin/
 Properties/
-BombermanSFML.csproj
-OpenTK.Compatibility.dll
-OpenTK.dll
-csfml-audio-2.dll
-csfml-graphics-2.dll
-csfml-system-2.dll
-csfml-window-2.dll
-libsndfile-1.dll
-openal32.dll
